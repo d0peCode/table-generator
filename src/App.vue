@@ -4,10 +4,10 @@
     </div>
 </template>
 <script>
-import index from './pages/Index'
+import Index from './pages/Index'
 
 export default {
-    components: { index }
+    components: { Index }
 }
 </script>
 <style lang="scss" src="./styles/scss/main.scss"></style>
