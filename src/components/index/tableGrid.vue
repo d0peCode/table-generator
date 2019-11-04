@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+        <p>Wielkość tabeli będziesz mógł również edytować po wybraniu.</p>
     </section>
 </template>
 <script>
@@ -58,3 +59,4 @@ export default {
     }
 }
 </script>
+<style scoped lang="scss" src="../../styles/scss/components/_table-grid.scss"></style>
