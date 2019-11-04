@@ -1,11 +1,11 @@
 <template>
-    <section class="table-grid" v-if="!tableGenerated">
+    <section class="table-grid" v-show="!tableGenerated">
         <h2 class="heading-secondary">Wybierz wielkość nowej tabeli</h2>
         <p>Maksymalna wielkość tabeli:</p>
         <div class="table-grid__form">
-            <label for="x">od (x)</label>
+            <label for="x">wiersze:</label>
             <input id="x" type="number" v-model="gridSize.max.x" min="1" class="table-grid__input">
-            <label for="y">do (y)</label>
+            <label for="y">kolumny:</label>
             <input id="y" type="number" v-model="gridSize.max.y" min="1" class="table-grid__input">
         </div>
         <p>Najedź i kliknij aby wybrać wielkość nowej tabeli:</p>
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <p>Wielkość tabeli będziesz mógł również edytować po wybraniu.</p>
+        <p>Wielkość tabeli będziesz mógł edytować również po wybraniu.</p>
     </section>
 </template>
 <script>
