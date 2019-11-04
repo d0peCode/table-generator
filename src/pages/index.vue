@@ -1,16 +1,16 @@
 <template>
     <main>
-        <hello></hello>
+        <navbar></navbar>
         <table-grid></table-grid>
         <table-generator></table-generator>
     </main>
 </template>
 <script>
-import hello from '../components/index/hello';
+import navbar from '../components/index/navbar';
 import tableGrid from '../components/index/tableGrid';
 import tableGenerator from '../components/index/tableGenerator';
 
 export default {
-    components: { hello, tableGrid, tableGenerator }
+    components: { navbar, tableGrid, tableGenerator }
 }
 </script>
