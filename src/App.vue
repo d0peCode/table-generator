@@ -10,3 +10,4 @@ export default {
     components: { index }
 }
 </script>
+<style lang="scss" src="./styles/scss/main.scss"></style>

@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+        <p>Wielkość tabeli będziesz mógł również edytować po wybraniu.</p>
     </section>
 </template>
 <script>
