@@ -1,7 +1,7 @@
 <template>
     <section class="table-generator" v-show="called">
-        <h2 class="heading-secondary">Twoja tabela:</h2>
-        <p>Użyj + / - aby dodać / usunąć nową kolumnę/wiersz:</p>
+        <h2 class="heading-secondary">Twoja tabela</h2>
+        <p>Użyj + / - aby dodać / usunąć kolumnę / wiersz:</p>
         <div class="table-generator__manager">
             <div class="table-generator__plus" @click="modifyTable('column', 'increase')"></div>
             <div class="table-generator__minus" @click="modifyTable('column', 'decrease')"></div>
@@ -10,17 +10,18 @@
             <div class="table-generator__minus" @click="modifyTable('row', 'decrease')"></div>
         </div>
         <table class="table-generator__table">
-            <tr v-for="n in parseInt(tableSize.y)"
+            <tr v-for="n in parseInt(tableSize.y) + 1"
                 :key="n">
-                <td v-for="i in parseInt(tableSize.x) + 1">
-                    <input type="number" :placeholder="i" v-if="i <= tableSize.x" v-model="tableValues[n-1][i-1]">
+                <td v-for="i in parseInt(tableSize.x) + 1"
+                    v-if="n <= tableSize.y">
+                    <input type="number" :placeholder="i" v-if="i <= tableSize.x" v-model="tableValues[n - 1][i - 1]">
                     <p v-else>Śr: {{ getAverage(tableValues[n-1]) }}</p>
+                </td>
+                <td v-else-if="i <= tableSize.y">
+                    Su: {{ getSum(i - 1) }}
                 </td>
             </tr>
         </table>
-        <pre>
-            {{ tableValues }}
-        </pre>
     </section>
 </template>
 <script>
@@ -54,21 +55,22 @@ export default {
         },
         modifyTable(line, option) {
             if(line === 'row') {
-                if(this.tableSize.y === 1) return;
                 if(option === 'increase') {
                     this.tableSize.y += 1;
                     this.tableValues.push([]);
                 }
                 if(option === 'decrease') {
+                    if(this.tableSize.y === 1) return;
                     this.tableSize.y -= 1;
+                    this.tableValues.pop();
                 }
             }
             if(line === 'column') {
-                if(this.tableSize.x === 1) return;
                 if(option === 'increase') {
                     this.tableSize.x += 1;
                 }
                 if(option === 'decrease') {
+                    if(this.tableSize.x === 1) return;
                     this.tableSize.x -= 1;
                 }
             }
@@ -85,8 +87,21 @@ export default {
             }
             return average;
         },
-        getSum(array) {
-
+        getColumn(index) {
+            const column = [];
+            for(let i = 0, l = this.tableValues.length; i < l; i++) {
+                column.push(this.tableValues[i][index]);
+            }
+            return column;
+        },
+        getSum(index) {
+            const array = this.getColumn(index);
+            console.log('array', array)
+            let total = 0;
+            for(let i = 0, l = array.length; i < l; i++) {
+                if(array[i]) total += parseFloat(array[i]);
+            }
+            return total;
         }
     }
 }
