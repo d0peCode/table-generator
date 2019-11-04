@@ -58,3 +58,4 @@ export default {
     }
 }
 </script>
+<style scoped lang="scss" src="../../styles/scss/components/_table-grid.scss"></style>
