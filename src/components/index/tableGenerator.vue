@@ -17,7 +17,7 @@
                     <input type="number" :placeholder="i" v-if="i <= tableSize.x" v-model="tableValues[n - 1][i - 1]">
                     <p v-else>Śr: {{ getAverage(tableValues[n-1]) }}</p>
                 </td>
-                <td v-else-if="i <= tableSize.y">
+                <td v-else-if="i <= tableSize.x">
                     Su: {{ getSum(i - 1) }}
                 </td>
             </tr>
@@ -72,6 +72,9 @@ export default {
                 if(option === 'decrease') {
                     if(this.tableSize.x === 1) return;
                     this.tableSize.x -= 1;
+                    for(let i = 0, l = this.tableValues.length; i < l; i++) {
+                        this.tableValues[i].pop();
+                    }
                 }
             }
         },
