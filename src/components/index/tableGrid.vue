@@ -35,18 +35,9 @@ export default {
         return {
             tableGenerated: false,
             gridSize: {
-                max: {
-                    x: 10,
-                    y: 10
-                },
-                hovered: {
-                    x: 0,
-                    y: 0
-                },
-                selected: {
-                    x: 0,
-                    y: 0
-                }
+                max: { x: 10, y: 10 },
+                hovered: { x: 0, y: 0 },
+                selected: { x: 0, y: 0 }
             }
         }
     },
