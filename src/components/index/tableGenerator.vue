@@ -81,7 +81,8 @@ export default {
             for(let i = 0, l = array.length; i < l; i++) {
                 if(array[i]) total += parseFloat(array[i]);
             }
-            const average = total / array.length;
+            const validElementsLength = array.filter(Boolean).length;
+            const average = total / validElementsLength;
             if(this.countDecimal(average) > 3) {
                 return average.toFixed(3)
             }
@@ -96,7 +97,6 @@ export default {
         },
         getSum(index) {
             const array = this.getColumn(index);
-            console.log('array', array)
             let total = 0;
             for(let i = 0, l = array.length; i < l; i++) {
                 if(array[i]) total += parseFloat(array[i]);
