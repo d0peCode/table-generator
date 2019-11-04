@@ -14,7 +14,11 @@
                 :key="n">
                 <td v-for="i in parseInt(tableSize.x) + 1"
                     v-if="n <= tableSize.y">
-                    <input type="number" :placeholder="i" v-if="i <= tableSize.x" v-model="tableValues[n - 1][i - 1]">
+                    <label v-if="i <= tableSize.x" :for="'tableValue' + [n - 1] + [i - 1]">{{ i }}</label>
+                    <input type="number"
+                           :id="'tableValue' + [n - 1] + [i - 1]"
+                           v-if="i <= tableSize.x"
+                           v-model="tableValues[n - 1][i - 1]">
                     <p v-else>Śr: {{ getAverage(tableValues[n-1]) }}</p>
                 </td>
                 <td v-else-if="i <= tableSize.x">
