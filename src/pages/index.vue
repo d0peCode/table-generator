@@ -1,16 +1,14 @@
 <template>
     <main>
-        <navbar></navbar>
-        <table-grid></table-grid>
-        <table-generator></table-generator>
+        <top-bar></top-bar>
+        <spreadsheet-table></spreadsheet-table>
     </main>
 </template>
 <script>
-import navbar from '../components/index/navbar';
-import tableGrid from '../components/index/tableGrid';
-import tableGenerator from '../components/index/tableGenerator';
+import TopBar from '../components/index/TopBar';
+import SpreadsheetTable from '../components/index/SpreadsheetTable';
 
 export default {
-    components: { navbar, tableGrid, tableGenerator }
+    components: { TopBar, SpreadsheetTable }
 }
 </script>

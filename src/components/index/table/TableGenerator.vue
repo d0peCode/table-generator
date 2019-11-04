@@ -1,5 +1,5 @@
 <template>
-    <section class="table-generator" v-show="called">
+    <section class="table-generator">
         <h2 class="heading-secondary">Twoja tabela</h2>
         <p>Użyj + / - aby dodać / usunąć kolumnę / wiersz:</p>
         <div class="table-generator__manager">
@@ -29,20 +29,22 @@
     </section>
 </template>
 <script>
-import { eventBus } from "../../helpers/eventBus";
+import { eventBus } from "../../../helpers/eventBus";
 
 export default {
     data() {
         return {
-            called: false,
             tableSize: {
-                x: 0,
-                y: 0
+                x: 4,
+                y: 4
             },
             tableValues: []
         }
     },
     created() {
+        for (let i = 0, l = this.tableSize.y; i < l; i++) {
+            this.tableValues.push([]);
+        }
         eventBus.$on('generate::table', data => {
             this.called = true;
             this.tableSize.x = data.x;
@@ -113,4 +115,4 @@ export default {
     }
 }
 </script>
-<style scoped lang="scss" src="../../styles/scss/components/_table-generator.scss"></style>
+<style scoped lang="scss" src="../../../styles/scss/components/_table-generator.scss"></style>

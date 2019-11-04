@@ -4,4 +4,4 @@
         <p>Application which generates customizable table. Made by tymdev for Koleo.</p>
     </header>
 </template>
-<style scoped lang="scss" src="../../styles/scss/components/_navbar.scss"></style>
+<style scoped lang="scss" src="../../styles/scss/components/_topbar.scss"></style>
