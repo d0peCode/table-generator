@@ -1,6 +1,52 @@
+@import '../abstracts/variables';
+
 .table-generator {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &__manager {
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+
+        p {
+            padding: .5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+    }
+    &__plus, &__minus {
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+        margin: 1px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &__plus {
+        background-image: url("../../../assets/plus.png");
+    }
+    &__minus {
+        background-image: url("../../../assets/minus.png");
+    }
+    &__table {
+        caption {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        td {
+            input {
+                width: 8rem;
+                border-radius: 5px;
+                padding: 1rem;
+                border: 1px solid $color-grey-light;
+            }
+        }
+    }
 }
