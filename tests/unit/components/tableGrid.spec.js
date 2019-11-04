@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import tableGrid from '../../../src/components/index/tableGrid';
+import tableGrid from '../../../src/components/index/table/TableGrid';
 
 describe('tableGrid.vue', () => {
     test('if tableGrid default grid max size is 10x10', () => {
