@@ -54,6 +54,7 @@ export default {
         },
         modifyTable(line, option) {
             if(line === 'row') {
+                if(this.tableSize.y === 1) return;
                 if(option === 'increase') {
                     this.tableSize.y += 1;
                     this.tableValues.push([]);
@@ -63,6 +64,7 @@ export default {
                 }
             }
             if(line === 'column') {
+                if(this.tableSize.x === 1) return;
                 if(option === 'increase') {
                     this.tableSize.x += 1;
                 }
