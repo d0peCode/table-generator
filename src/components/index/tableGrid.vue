@@ -16,7 +16,7 @@
                 <div class="table-grid__grid-col"
                      v-for="i in parseInt(gridSize.max.x)"
                      @mouseover="selectHovered(n, i)"
-                     @click="selectNewTableSize(n, i)"
+                     @click="selectNewTableSize(i, n)"
                      :key="i"
                      :class="n <= gridSize.hovered.x && i <= gridSize.hovered.y
                                 ? 'table-grid__grid-col--hover'
