@@ -1,14 +1,5 @@
 <template>
-    <section class="table-generator">
-        <h2 class="heading-secondary">Twoja tabela</h2>
-        <p>Użyj + / - aby dodać / usunąć kolumnę / wiersz:</p>
-        <div class="table-generator__manager">
-            <div class="table-generator__plus" @click="modifyTable('column', 'increase')"></div>
-            <div class="table-generator__minus" @click="modifyTable('column', 'decrease')"></div>
-            <p>{{ tableSize.x }} x {{ tableSize.y }}</p>
-            <div class="table-generator__plus" @click="modifyTable('row', 'increase')"></div>
-            <div class="table-generator__minus" @click="modifyTable('row', 'decrease')"></div>
-        </div>
+    <div class="table-generator">
         <table class="table-generator__table">
             <tr v-for="n in parseInt(tableSize.y) + 1"
                 :key="n">
@@ -18,99 +9,81 @@
                     <input type="number"
                            :id="'tableValue' + [n - 1] + [i - 1]"
                            v-if="i <= tableSize.x"
-                           v-model="tableValues[n - 1][i - 1]">
-                    <p v-else>Śr: {{ getAverage(tableValues[n-1]) }}</p>
+                           v-model="tableValues[n - 1][i - 1]"
+                           @input="setTableValues(n, i, $event.data)">
+                    <p v-else>Śr: {{ getAverage(tableValues[n - 1]) }}</p>
                 </td>
                 <td v-else-if="i <= tableSize.x">
                     Su: {{ getSum(i - 1) }}
                 </td>
             </tr>
         </table>
-    </section>
+    </div>
 </template>
 <script>
 import { eventBus } from "../../../helpers/eventBus";
 
 export default {
-    data() {
-        return {
-            tableSize: {
-                x: 4,
-                y: 4
+    computed: {
+        tableSize: {
+            get() {
+                return this.$store.getters.getTableSize;
             },
-            tableValues: []
+            set(newValue) {
+                return this.$store.dispatch('setTableSize', { data: newValue });
+            }
+        },
+        tableValues: {
+            get() {
+                return this.$store.getters.getTableValues;
+            }
         }
     },
     created() {
-        for (let i = 0, l = this.tableSize.y; i < l; i++) {
-            this.tableValues.push([]);
+        if(!this.tableSize.x || !this.tableSize.y) {
+            this.tableSize = { x: 4, y: 4 };
         }
         eventBus.$on('generate::table', data => {
-            this.called = true;
-            this.tableSize.x = data.x;
-            this.tableSize.y = data.y;
-            for (let i = 0, l = data.y; i < l; i++) {
-                this.tableValues.push([]);
-            }
+            this.$store.dispatch("setTableValues", { data: [] });
+            this.tableSize = {x: data.x, y: data.y };
         })
     },
     methods: {
-        countDecimal(value) {
-            if (Math.floor(value) === value) return 0;
-            return value.toString().split(".")[1].length || 0;
+        setTableValues(n, i) {
+            return this.$store.dispatch("setTableValues", { data: this.tableValues });
         },
-        modifyTable(line, option) {
-            if(line === 'row') {
-                if(option === 'increase') {
-                    this.tableSize.y += 1;
-                    this.tableValues.push([]);
-                }
-                if(option === 'decrease') {
-                    if(this.tableSize.y === 1) return;
-                    this.tableSize.y -= 1;
-                    this.tableValues.pop();
-                }
-            }
-            if(line === 'column') {
-                if(option === 'increase') {
-                    this.tableSize.x += 1;
-                }
-                if(option === 'decrease') {
-                    if(this.tableSize.x === 1) return;
-                    this.tableSize.x -= 1;
-                    for(let i = 0, l = this.tableValues.length; i < l; i++) {
-                        this.tableValues[i].pop();
-                    }
-                }
-            }
+        countDecimal(value) {
+            if (!value || Math.floor(value) === value) return 0;
+            return value.toString().split(".")[1].length || 0;
         },
         getAverage(array) {
             let total = 0;
-            if(array.length === 0) return 'brak';
+            if(!array || array.length === 0) return 'brak';
             for(let i = 0, l = array.length; i < l; i++) {
                 if(array[i]) total += parseFloat(array[i]);
             }
             const validElementsLength = array.filter(Boolean).length;
-            const average = total / validElementsLength;
-            if(this.countDecimal(average) > 3) {
-                return average.toFixed(3)
+            if(validElementsLength > 0) {
+                const average = total / validElementsLength;
+                if(this.countDecimal(average) > 3) {
+                    return average.toFixed(3)
+                } else {
+                    return average;
+                }
             }
-            return average;
+            return 'brak';
         },
         getColumn(index) {
             const column = [];
             for(let i = 0, l = this.tableValues.length; i < l; i++) {
-                column.push(this.tableValues[i][index]);
+                if(this.tableValues[i][index]) column.push(this.tableValues[i][index]);
             }
             return column;
         },
         getSum(index) {
             const array = this.getColumn(index);
-            let total = 0;
-            for(let i = 0, l = array.length; i < l; i++) {
-                if(array[i]) total += parseFloat(array[i]);
-            }
-            return total;
+            if(array.length > 0) return array.reduce((a, b) => ( parseFloat(a) + parseFloat(b) ));
+            return 'brak';
         }
     }
 }

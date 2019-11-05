@@ -48,6 +48,11 @@ export default {
             }
         }
     },
+    created() {
+        eventBus.$on('toggle::grid', () => {
+            this.show = !this.show;
+        })
+    },
     methods: {
         generateTable() {
             eventBus.$emit('generate::table', this.gridSize.selected);
