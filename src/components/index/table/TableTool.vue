@@ -3,11 +3,11 @@
         <h2 class="heading-secondary">Twoja tabela</h2>
         <p>Użyj + / - aby dodać / usunąć kolumnę / wiersz:</p>
         <div class="table-tool__manager">
-            <div class="table-tool__plus" @click="modifyTable('column', 'increase')"></div>
-            <div class="table-tool__minus" @click="modifyTable('column', 'decrease')"></div>
+            <div class="table-tool__plus" @click="modifyTable('column', 1)"></div>
+            <div class="table-tool__minus" @click="modifyTable('column', -1)"></div>
             <p>{{ tableSize.x }} x {{ tableSize.y }}</p>
-            <div class="table-tool__plus" @click="modifyTable('row', 'increase')"></div>
-            <div class="table-tool__minus" @click="modifyTable('row', 'decrease')"></div>
+            <div class="table-tool__plus" @click="modifyTable('row', 1)"></div>
+            <div class="table-tool__minus" @click="modifyTable('row', -1)"></div>
         </div>
         <button type="button" @click="clearTable()" class="table-tool__button">Wyczyść tabelę</button>
     </section>
@@ -27,37 +27,15 @@ export default {
         }
     },
     methods: {
-        modifyTable(line, option) {
-            if(line === 'row') {
-                if(option === 'increase') {
-                    this.tableSize = {
-                        x: this.tableSize.x,
-                        y: this.tableSize.y + 1
-                    };
-                }
-                if(option === 'decrease') {
-                    if(this.tableSize.y === 1) return;
-                    this.tableSize = {
-                        x: this.tableSize.x,
-                        y: this.tableSize.y - 1
-                    };
-                }
-            }
-            if(line === 'column') {
-                if(option === 'increase') {
-                    this.tableSize = {
-                        x: this.tableSize.x + 1,
-                        y: this.tableSize.y
-                    };
-                }
-                if(option === 'decrease') {
-                    if(this.tableSize.x === 1) return;
-                    this.tableSize = {
-                        x: this.tableSize.x - 1,
-                        y: this.tableSize.y
-                    };
-                }
-            }
+        modifyTable(line, by) {
+            this.tableSize = {
+                x: line === 'row'
+                    ? this.tableSize.x
+                    : this.tableSize.x + parseInt(by),
+                y: line === 'row'
+                    ? this.tableSize.y + parseInt(by)
+                    : this.tableSize.y
+            };
         },
         clearTable() {
             eventBus.$emit('toggle::grid');
