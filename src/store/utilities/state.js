@@ -1,6 +1,8 @@
 const state = {
-    tableSize: {},
-    currentValues: []
+    table: {
+        size: {},
+        values: []
+    }
 };
 
 export default state
