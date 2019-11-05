@@ -40,7 +40,7 @@ export default {
         clearTable() {
             eventBus.$emit('toggle::grid');
             this.$store.dispatch("setTableValues", { data: [] });
-            this.tableSize = {x: 4, y: 4 };
+            this.tableSize = { x: 4, y: 4 };
         }
     }
 }
