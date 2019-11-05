@@ -11,7 +11,7 @@
                            v-if="i <= tableSize.x"
                            v-model="tableValues[n - 1][i - 1]"
                            @input="setTableValues(n, i, $event.data)">
-                    <p v-else>Śr: {{ getAverage(tableValues[n-1]) }}</p>
+                    <p v-else>Śr: {{ getAverage(tableValues[n - 1]) }}</p>
                 </td>
                 <td v-else-if="i <= tableSize.x">
                     Su: {{ getSum(i - 1) }}
@@ -24,20 +24,12 @@
 import { eventBus } from "../../../helpers/eventBus";
 
 export default {
-    created() {
-        this.tableSize = { x: 4, y: 4 };
-
-        eventBus.$on('generate::table', data => {
-            this.tableSize = {x: data.x, y: data.y };
-        })
-    },
     computed: {
         tableSize: {
             get() {
                 return this.$store.getters.getTableSize;
             },
             set(newValue) {
-                console.log('set new size');
                 return this.$store.dispatch('setTableSize', { data: newValue });
             }
         },
@@ -47,19 +39,26 @@ export default {
             }
         }
     },
+    created() {
+        if(!this.tableSize.x || !this.tableSize.y) {
+            this.tableSize = { x: 4, y: 4 };
+        }
+        eventBus.$on('generate::table', data => {
+            this.tableSize = {x: data.x, y: data.y };
+        })
+    },
     methods: {
         setTableValues(n, i, newValue) {
             newValue = this.tableValues;
             return this.$store.dispatch("setTableValues", { data: newValue });
         },
         countDecimal(value) {
-            if (Math.floor(value) === value) return 0;
+            if (!value || Math.floor(value) === value) return 0;
             return value.toString().split(".")[1].length || 0;
         },
         getAverage(array) {
             let total = 0;
-            if(array.length === 0) return 'brak';
-            console.log('array', array)
+            if(!array || array.length === 0) return 'brak';
             for(let i = 0, l = array.length; i < l; i++) {
                 if(array[i]) total += parseFloat(array[i]);
             }
@@ -79,7 +78,8 @@ export default {
         },
         getSum(index) {
             const array = this.getColumn(index);
-            return array.reduce((a, b) => ( parseFloat(a) + parseFloat(b) ));
+            if(array.length > 0) return array.reduce((a, b) => ( parseFloat(a) + parseFloat(b) ));
+            return 'brak';
         }
     }
 }
