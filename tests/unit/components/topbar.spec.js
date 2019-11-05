@@ -1,9 +1,9 @@
 import { mount } from "@vue/test-utils";
-import navbar from '../../../src/components/index/navbar';
+import TopBar from '../../../src/components/index/TopBar';
 
-describe('navbar.vue', () => {
-    test('if navbar contains logo and paragraph', () => {
-        const wrapper = mount(navbar);
+describe('topbar.vue', () => {
+    test('if TopBar contains logo and paragraph', () => {
+        const wrapper = mount(TopBar);
         expect(wrapper.text()).toContain('Table Generator');
         expect(wrapper.text()).toContain('Application which generates customizable table. Made by tymdev for Koleo.');
     })

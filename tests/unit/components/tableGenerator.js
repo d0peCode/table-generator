@@ -22,10 +22,10 @@ describe('tableGrid.vue', () => {
                 .classes('table-grid__grid-col--hover')
         ).toBe(true);
     });
-    test('if it hide after choosing grid', () => {
+    test('if is not visible after choosing grid', () => {
         const wrapper = mount(tableGrid);
-        wrapper.setData({ show: false });
-        expect(wrapper.find('.table-grid').classes()).toContain('table-grid__collapsed')
+        wrapper.setData({ tableGenerated: true });
+        expect(wrapper.find('.table-grid').isVisible()).toBe(false)
     });
     test('if event emitter work', () => {
         const wrapper = mount(tableGrid);
