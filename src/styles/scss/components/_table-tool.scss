@@ -1,3 +1,5 @@
+@import '../abstracts/variables';
+
 .table-tool {
     display: flex;
     flex-direction: column;
@@ -29,5 +31,19 @@
     }
     &__minus {
         background-image: url("../../../assets/minus.png");
+    }
+    &__button {
+        min-width: 8rem;
+        height: 4rem;
+        border-radius: 4px;
+        border: 1px solid $color-grey-light;
+        background-color: white;
+        padding: 10px;
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

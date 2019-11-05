@@ -9,9 +9,12 @@
             <div class="table-tool__plus" @click="modifyTable('row', 'increase')"></div>
             <div class="table-tool__minus" @click="modifyTable('row', 'decrease')"></div>
         </div>
+        <button type="button" @click="clearTable()" class="table-tool__button">Wyczyść tabelę</button>
     </section>
 </template>
 <script>
+import { eventBus } from "../../../helpers/eventBus";
+
 export default {
     computed: {
         tableSize: {
@@ -53,14 +56,14 @@ export default {
                         x: this.tableSize.x - 1,
                         y: this.tableSize.y
                     };
-                    /*
-                    for(let i = 0, l = this.tableValues.length; i < l; i++) {
-                        this.tableValues[i].pop();
-                    }
-                     */
                 }
             }
         },
+        clearTable() {
+            eventBus.$emit('toggle::grid');
+            this.$store.dispatch("setTableValues", { data: [] });
+            this.tableSize = {x: 4, y: 4 };
+        }
     }
 }
 </script>
