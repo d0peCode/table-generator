@@ -29,11 +29,11 @@ export default {
     methods: {
         modifyTable(line, by) {
             this.tableSize = {
-                x: line === 'column' && ( this.tableSize.x > 1 || parseInt(by) === 1 )
-                    ? this.tableSize.x + parseInt(by)
+                x: line === 'column' && ( this.tableSize.x > 1 || by === 1 )
+                    ? this.tableSize.x + by
                     : this.tableSize.x,
-                y: line === 'row' && ( this.tableSize.y > 1 || parseInt(by) === 1 )
-                    ? this.tableSize.y + parseInt(by)
+                y: line === 'row' && ( this.tableSize.y > 1 || by === 1 )
+                    ? this.tableSize.y + by
                     : this.tableSize.y
             };
         },
