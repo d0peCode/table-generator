@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import TableTool from '../../components/index/table/TableGrid';
+import TableTool from '../../components/index/table/TableTool';
 import TableGrid from '../../components/index/table/TableGrid';
 import TableGenerator from '../../components/index/table/TableGenerator';
 

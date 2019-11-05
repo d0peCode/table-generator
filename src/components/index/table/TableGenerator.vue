@@ -44,13 +44,13 @@ export default {
             this.tableSize = { x: 4, y: 4 };
         }
         eventBus.$on('generate::table', data => {
+            this.$store.dispatch("setTableValues", { data: [] });
             this.tableSize = {x: data.x, y: data.y };
         })
     },
     methods: {
-        setTableValues(n, i, newValue) {
-            newValue = this.tableValues;
-            return this.$store.dispatch("setTableValues", { data: newValue });
+        setTableValues(n, i) {
+            return this.$store.dispatch("setTableValues", { data: this.tableValues });
         },
         countDecimal(value) {
             if (!value || Math.floor(value) === value) return 0;
@@ -63,11 +63,15 @@ export default {
                 if(array[i]) total += parseFloat(array[i]);
             }
             const validElementsLength = array.filter(Boolean).length;
-            const average = total / validElementsLength;
-            if(this.countDecimal(average) > 3) {
-                return average.toFixed(3)
+            if(validElementsLength > 0) {
+                const average = total / validElementsLength;
+                if(this.countDecimal(average) > 3) {
+                    return average.toFixed(3)
+                } else {
+                    return average;
+                }
             }
-            return average;
+            return 'brak';
         },
         getColumn(index) {
             const column = [];
