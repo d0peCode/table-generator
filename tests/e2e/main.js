@@ -5,6 +5,7 @@ const setup = require('./setup/setup');
 
 const TableGrid = require('./table/TableGrid.spec');
 const TableGenerator = require('./table/TableGenerator.spec');
+const TableTool = require('./table/TableTool.spec');
 
 (async () => {
     const env = await launch();
@@ -17,7 +18,8 @@ const TableGenerator = require('./table/TableGenerator.spec');
     while(testRepeats > 0) {
         testsResults.push(
             await TableGrid(env.page),
-            await TableGenerator(env.page)
+            await TableGenerator(env.page),
+            await TableTool(env.page)
         );
 
         --testRepeats;
