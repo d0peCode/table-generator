@@ -19,7 +19,6 @@ const mutations = {
     },
     SET_TABLE_VALUES(state, response) {
         state.table.values = response.data;
-        console.log('set state.table.values mutation', state.table.values);
     }
 };
 

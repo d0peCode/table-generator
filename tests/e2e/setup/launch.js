@@ -4,7 +4,6 @@ const resolution = require('screen-resolution');
 const launch = async () => {
     try {
         const screenResolution = await resolution.get();
-        console.log('res', screenResolution);
         const browser = await puppeteer.launch({
             headless: false,
             slowMo: 100,
