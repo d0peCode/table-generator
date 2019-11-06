@@ -1,4 +1,5 @@
 @import '../abstracts/variables';
+@import '../abstracts/mixins';
 
 .table-grid {
     height: 40rem;
@@ -14,6 +15,11 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     transition: bottom .3s;
+    overflow-x: auto;
+
+    @include respond(phone) {
+        padding: 1rem;
+    }
 
     &__collapsed {
         bottom: -35rem;
@@ -21,7 +27,7 @@
 
     &__tool {
         position: absolute;
-        top: -10px;
+        top: 5px;
         left: 50%;
         transform: translateX(-50%);
         background: white;
@@ -48,6 +54,11 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+
+        @include respond(tab-port) {
+            align-items: center;
+            padding-top: 5rem;
+        }
     }
 
     &__grid {
@@ -58,6 +69,10 @@
         border-radius: 5px;
         padding: 1rem;
         overflow: auto;
+
+        @include respond(phone) {
+            min-width: unset;
+        }
 
         &-row {
             width: 100%;
