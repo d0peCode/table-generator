@@ -11,7 +11,7 @@ const fillAppTable = async page => {
                 for(let n = 0, l2 = td.length; n < l2; n++) {
                     input = td[n].getElementsByTagName('input')[0];
                     if(input) {
-                        input.value = getRandomNumber(1,10);
+                        input.value = getRandomNumber(1000,10000);
                         input.dispatchEvent(event);
                     }
                 }
