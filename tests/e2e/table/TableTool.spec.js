@@ -21,7 +21,6 @@ const tableTool = async page => {
         ) {
             return 'Tool test passed'
         } else {
-            console.log(currentSize , previousSize)
             return 'Tool test failure'
         }
     } catch (e) {
