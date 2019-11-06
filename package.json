@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e"
+    "test:e2e": "node ./tests/e2e/main.js"
   },
   "dependencies": {
     "core-js": "^3.3.2",
@@ -22,6 +22,7 @@
     "node-sass": "^4.12.0",
     "puppeteer": "^2.0.0",
     "sass-loader": "^8.0.0",
+    "screen-resolution": "^1.0.0",
     "vue-template-compiler": "^2.6.10"
   }
 }
