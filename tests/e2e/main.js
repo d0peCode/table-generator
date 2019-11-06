@@ -3,7 +3,8 @@ const getRandomNumber = require('./utilities/getRandomNumber');
 const launch = require('./setup/launch');
 const setup = require('./setup/setup');
 
-const grid = require('./table/grid');
+const TableGrid = require('./table/TableGrid.spec');
+const TableGenerator = require('./table/TableGenerator.spec');
 
 (async () => {
     const env = await launch();
@@ -14,16 +15,13 @@ const grid = require('./table/grid');
         testsResults = [];
 
     while(testRepeats > 0) {
-
-
         testsResults.push(
-            await grid(env.page)
+            await TableGrid(env.page),
+            await TableGenerator(env.page)
         );
-
 
         --testRepeats;
     }
 
-    testsResults = [...new Set(testsResults)];
     console.log('Everything done. Results:', testsResults);
 })();
