@@ -7,7 +7,7 @@ const launch = async () => {
         const browser = await puppeteer.launch({
             headless: false,
             slowMo: 100,
-            devtools: true,
+            devtools: false,
             args: [
                 `--window-size=${ screenResolution.width },${ screenResolution.height - 50 }`,
                 '--window-position=0,10'
