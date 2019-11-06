@@ -7,7 +7,8 @@ const launch = async () => {
         console.log('res', screenResolution);
         const browser = await puppeteer.launch({
             headless: false,
-            devtools: false,
+            slowMo: 100,
+            devtools: true,
             args: [
                 `--window-size=${ screenResolution.width },${ screenResolution.height - 50 }`,
                 '--window-position=0,10'
@@ -16,7 +17,8 @@ const launch = async () => {
         const page = await browser.newPage();
         return { page, browser }
     } catch (e) {
-        console.error('Error while launching puppeteer!')
+        console.error('Error while launching puppeteer!' +
+            'Error msg:', e);
     }
 };
 
