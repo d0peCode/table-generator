@@ -1,12 +1,19 @@
 @import '../abstracts/variables';
+@import '../abstracts/mixins';
 
 .table-generator {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
+    @include respond(phone) {
+        align-items: unset;
+    }
+
     &__table {
+        padding-bottom: 10rem;
+
         caption {
             width: 100%;
             display: flex;

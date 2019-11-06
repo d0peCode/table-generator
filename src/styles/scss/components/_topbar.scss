@@ -1,6 +1,7 @@
 @import '../abstracts/variables';
+@import '../abstracts/mixins';
 
-.navbar {
+.topbar {
     height: 6rem;
     width: 100%;
     display: flex;
@@ -8,4 +9,8 @@
     border-bottom: 1px solid $color-grey-light;
     align-items: center;
     justify-content: space-around;
+
+    @include respond(phone) {
+        text-align: center;
+    }
 }
