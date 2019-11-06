@@ -1,29 +1,25 @@
-# table-generator
+# table-generator for Astarium
 
-## Project setup
-```
-npm install
-```
+Szybki podgląd: http://table-generator.tymdev.pl/ jeżeli wyświetla się informacja o niezabezpieczonej stronie należy kliknąć "Zaawansowane" a następnie "Odwiedź mimo to".
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Instalacja
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Wymagany jest zainstalowany NodeJS.
 
-### Run your unit tests
-```
-npm run test:unit
-```
+- $ git clone https://github.com/d0peCode/table-generator
+- $ cd table-generator
+- $ npm i
+- $ npm run serve
 
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
+## Testy
 
-### Customize configuration
+### e2e (Puppeteer)
+
+- npm run test:e2e
+
+### unit (Jest)
+
+- npm run test:unit
+
+## Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
